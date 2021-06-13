@@ -115,7 +115,6 @@ def amazonScrapper():
 
     data = pd.DataFrame(columns=["ID","Name","Price","Image","Image URL"])
     # reprinting the screen
-    stdscr = curses.initscr()
     print("Fetching Products....")
 
     for url in url_pages:
@@ -151,8 +150,6 @@ def amazonScrapper():
                 download_path =  images[0]['src']
                 imagePath = download_path.split('/')[-1].split('?')[0]
                 price_value = price[0].text.replace(".","")
-                stdscr.addstr(0, 0, "Fetching Products...." + str(product_ID))
-                stdscr.refresh()
 
                 row = pd.Series(data=[product_ID,product_name_from_web,price_value,f'{ root+"/"+imagePath}',download_path],index=["ID","Name","Price","Image","Image URL"],name=product_ID)
                 data = data.append(row)

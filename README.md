@@ -1,6 +1,5 @@
-# Amazon Product Scrapper
+# Amazon Web Scrapper
 
-![](https://img.shields.io/github/last-commit/mkjodhani/amazon-scraper)
 ### Three things you  will need:
 - Name of directory in which you want to store all the images of products
 - The URL of product's main page
@@ -92,8 +91,6 @@ def save(data):
 
 ```python
 def amazonScrapper():
-    # reprinting the screen
-    stdscr = curses.initscr()
 
     root = input("Entet The Folder in which you want to save all the product images :")
     first =input('Enter The URL:')
@@ -108,6 +105,8 @@ def amazonScrapper():
     index = 0
 
     data = pd.DataFrame(columns=["ID","Name","Price","Image","Image URL"])
+    # reprinting the screen
+    stdscr = curses.initscr()
     print("Fetching Products....")
 
     for url in url_pages:

@@ -1,4 +1,4 @@
-# Amazon Web Scrapper
+# Amazon Product Scrapper
 
 ![](https://img.shields.io/github/last-commit/mkjodhani/amazon-scraper)
 ### Three things you  will need:

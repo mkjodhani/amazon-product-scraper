@@ -1,6 +1,6 @@
 # Amazon Web Scrapper
 
-https://img.shields.io/github/last-commit/mkjodhani/amazon-scraper
+![](https://img.shields.io/github/last-commit/mkjodhani/amazon-scraper)
 ### Three things you  will need:
 - Name of directory in which you want to store all the images of products
 - The URL of product's main page

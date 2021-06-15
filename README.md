@@ -1,10 +1,6 @@
 # Amazon Web Scrapper
-
-### Three things you  will need:
-- Name of directory in which you want to store all the images of products
-- The URL of product's main page
-- the total number of products you want.
-
+![](https://img.shields.io/github/last-commit/mkjodhani/amazon-product-scraper)
+Simple Amazon Product Scraper will give details of products in diffrent format of data like JSON,SQL Script,CSV and Excel.
 ## Types of Output
 1. JSON
 2. CSV

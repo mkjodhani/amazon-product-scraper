@@ -175,13 +175,12 @@ class GUI:
         return pb
 
     def showTable(self, data):
-        f = Frame(master=self.window)
-        f.pack(fill=BOTH, expand=1)
-        df = TableModel.getSampleData()
-        pt = Table(f, dataframe=data,
+        self.tableFrame = Frame(master=self.window)
+        tableFrame.pack(fill=BOTH, expand=1)
+        pt = Table(tableFrame, dataframe=data,
                    showtoolbar=True, showstatusbar=True)
         pt.show()
-
+        
     def start(self):
         self.window.mainloop()
 

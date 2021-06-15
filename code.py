@@ -83,9 +83,9 @@ class GUI:
                 self.showTable(dataFrame)
                 self.process .delete(0, END)
                 self.process .insert(0, "Fetching...... Completed!")
-            except:
+            except Exception as e:
                 self.process.delete(0, END)
-                self.process.insert(0, "Something went wrong!")
+                self.process.insert(0, e)
         
 
     def setLabel(self, mainFrame, value, wd, position):

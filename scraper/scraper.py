@@ -1,7 +1,7 @@
 import pandas as pd
 import requests 
 from bs4 import BeautifulSoup
-import  os
+import  os,shutil
 
 class Scraper:
     def __init__(self,location,url,maxItems,outputType,filename):
@@ -11,7 +11,9 @@ class Scraper:
         self.outputType = outputType
         self.filename = filename
         self.dataFrame = pd.DataFrame(columns=["ID","Name","Price","Image","Image URL"])
-        
+        if os.path.exists(self.location):
+            shutil.rmtree(self.location)
+        os.mkdir(self.location)
     def scrape(self,url):  
         headers = {
             'dnt': '1',
@@ -33,7 +35,7 @@ class Scraper:
 
     def savetoSQL(self):
         statements = [] 
-        create_statement = pd.io.sql.get_schema(self.dataFrame.reset_index(), self.self.filename)  
+        create_statement = pd.io.sql.get_schema(self.dataFrame.reset_index(), self.filename)  
         statements.append(create_statement)
         for index, row in self.dataFrame.iterrows():       
             statements.append('INSERT INTO '+self.filename+' ('+ str(', '.join(self.dataFrame.columns))+ ') VALUES '+ str(tuple(row.values)))        
@@ -50,7 +52,7 @@ class Scraper:
         elif ext == "EXCEL":
             self.dataFrame.to_excel( self.filename+".xlsx", sheet_name=self.filename)
         elif ext == "SQL":
-            self.savetoSQL(self.dataFrame,self.filename)
+            self.savetoSQL()
 
     def save(self):
         types = {1:"JSON",2:"CSV",3:"EXCEL",4:"SQL"}
@@ -61,9 +63,7 @@ class Scraper:
         url_pages = [self.url]
         page_number = 1
         product_ID = 1
-        if os.path.exists(self.location):
-            os.rmdir(self.location)
-        os.mkdir(self.location)
+        
         for url in url_pages:
             html_text = self.scrape(url)
             soup = BeautifulSoup(html_text,'html.parser')

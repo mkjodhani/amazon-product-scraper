@@ -17,8 +17,14 @@ python3 install -r requiremnet.txt
 python3 code.py
 ```
 
+![](screenshots/1.png)
+
+![](screenshots/2.png)
+
+![](screenshots/3.png)
 
 # JSON Output:
+
 ```json
 {
   "ID": {
@@ -137,5 +143,4 @@ INSERT INTO LaptopTable (ID, Name, Price, Image, Image URL) VALUES (12, 'Lenovo 
 
 INSERT INTO LaptopTable (ID, Name, Price, Image, Image URL) VALUES (13, 'RDP ThinBook 1010 - Intel Celeron Quad Core Processor, 4GB RAM, 64GB Storage, Windows 10 Pro, 14.1” HD Screen', '19,990', 'Laptops/51C6EHkMQpS._AC_UY218_.jpg', 'https://m.media-amazon.com/images/I/51C6EHkMQpS._AC_UY218_.jpg')
 ~~~~
-
 

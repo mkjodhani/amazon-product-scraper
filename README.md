@@ -1,5 +1,5 @@
-# Amazon Web Scrapper
-![](https://img.shields.io/github/last-commit/mkjodhani/amazon-product-scraper)
+# Amazon Web Scrapper![](https://img.shields.io/github/last-commit/mkjodhani/amazon-product-scraper)
+
 Simple Amazon Product Scraper will give details of products in diffrent format of data like JSON,SQL Script,CSV and Excel.
 ## Types of Output
 1. JSON

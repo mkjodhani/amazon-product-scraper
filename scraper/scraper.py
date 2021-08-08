@@ -44,6 +44,61 @@ class Scraper:
         file.write(text)
         file.close()
 
+    def makeHTML(self):
+        first_html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">"""
+        html_style = """  <style>
+    h1{
+      text-align: center;
+    }
+  table th{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background-color: darkgrey;
+  border-color: #003430;
+  border-radius: 5px;
+  text-align:center;
+  }
+  table tr {
+  height: 50px;
+  }
+  tr  {
+  height: 100px;
+  border-top: none;
+  }
+  </style>
+"""
+        end_html = """</body>
+<script>
+  var rows = document.getElementsByTagName("tbody")[0].getElementsByTagName('tr');
+  for(var i in rows){
+    url = rows[i].getElementsByTagName('td')[1].style.minWidth = "100px";
+    url = rows[i].getElementsByTagName('td')[1].style.textAlign = 'center';
+    url = rows[i].getElementsByTagName('td')[3].innerHTML;
+    src = rows[i].getElementsByTagName('td')[2].innerHTML;
+    var url_td = document.createElement('a');
+    url_td.href = url;
+    url_td.textContent = url;
+    var img = document.createElement('img');
+    img.src = src;
+    rows[i].getElementsByTagName('td')[3].innerHTML = "";
+    rows[i].getElementsByTagName('td')[3].appendChild(url_td)
+    rows[i].getElementsByTagName('td')[2].innerHTML = "";
+    rows[i].getElementsByTagName('td')[2].appendChild(img);
+  }
+</script>
+</html>"""
+
+        text = self.dataFrame.drop(columns=["ID"]).to_html()
+        html = first_html + f"  <title>{self.location}</title>" + html_style +f"</head><body><h1>{self.location}</h1>"+text+end_html
+        file = open(self.filename+".html","w")
+        file.write(html)
+        file.close()
+
     def saveToFile(self,ext):
         if ext == "JSON":
             self.dataFrame.to_json(self.filename+".json")
@@ -53,9 +108,11 @@ class Scraper:
             self.dataFrame.to_excel( self.filename+".xlsx", sheet_name=self.filename)
         elif ext == "SQL":
             self.savetoSQL()
+        elif ext == "HTML":
+            self.makeHTML()
 
     def save(self):
-        types = {1:"JSON",2:"CSV",3:"EXCEL",4:"SQL"}
+        types = {1:"JSON",2:"CSV",3:"EXCEL",4:"SQL",5:"HTML"}
         self.saveToFile(types[self.outputType])
 
 

@@ -7,6 +7,7 @@ Simple Amazon Product Scraper will give details of products in diffrent format o
 2. CSV
 3. EXCEL
 4. SQL
+5. HTML
 
 ## How to Run?
 ```bash
@@ -141,3 +142,6 @@ INSERT INTO LaptopTable (ID, Name, Price, Image, Image URL) VALUES (12, 'Lenovo 
 INSERT INTO LaptopTable (ID, Name, Price, Image, Image URL) VALUES (13, 'RDP ThinBook 1010 - Intel Celeron Quad Core Processor, 4GB RAM, 64GB Storage, Windows 10 Pro, 14.1” HD Screen', '19,990', 'Laptops/51C6EHkMQpS._AC_UY218_.jpg', 'https://m.media-amazon.com/images/I/51C6EHkMQpS._AC_UY218_.jpg')
 ~~~~
 
+# HTML
+
+![](screenshots/4.png)

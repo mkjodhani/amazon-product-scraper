@@ -18,16 +18,16 @@ class GUI:
 
         # Directory row
         self.setLabel(self.mainFrame, "Directory", 10, {"row": 1, "col": 0})
-        self.location = self.setEntry(self.mainFrame, 30, {"row": 1, "col": 1})
+        self.location = self.setEntry(self.mainFrame, 40, {"row": 1, "col": 1})
 
         # Product row
         self.setLabel(self.mainFrame, "Name of Product",
                       10, {"row": 2, "col": 0})
-        self.URL = self.setEntry(self.mainFrame, 30, {"row": 2, "col": 1})
+        self.URL = self.setEntry(self.mainFrame, 40, {"row": 2, "col": 1})
 
         # Max Items row
         self.setLabel(self.mainFrame, "Max Items", 10, {"row": 3, "col": 0})
-        self.maxItems = self.setEntry(self.mainFrame, 30, {"row": 3, "col": 1})
+        self.maxItems = self.setEntry(self.mainFrame, 40, {"row": 3, "col": 1})
 
         # Save Type row
         self.setLabel(self.mainFrame, "Save Type", 10, {"row": 4, "col": 0})
@@ -36,13 +36,13 @@ class GUI:
         # Output File row
         self.setLabel(self.mainFrame, "Output File Name",
                       10, {"row": 5, "col": 0})
-        self.fileName = self.setEntry(self.mainFrame, 30, {"row": 5, "col": 1})
+        self.fileName = self.setEntry(self.mainFrame, 40, {"row": 5, "col": 1})
 
         # Progress row
         self.setLabel(self.mainFrame, "Progress Status",
                       10, {"row": 6, "col": 0})
 
-        self.process = self.setEntry(self.mainFrame, 30, {"row": 6, "col": 1})
+        self.process = self.setEntry(self.mainFrame, 40, {"row": 6, "col": 1})
 
         # 8th row
         self.buttons = self.setButtons(self.mainFrame, ["Fetch!", "Exit"], {
@@ -62,7 +62,7 @@ class GUI:
             value = args[index].get()
             if len(value) == 0:
                 args[index].delete(0, END)
-                args[index].insert(0, "ENter The Valid Value")
+                args[index].insert(0, "Enter The Valid Value")
 
             if(index == 3 or index == 2):
                 try:
@@ -70,6 +70,7 @@ class GUI:
                 except:
                     args[index].delete(0, END)
                     args[index].insert(0, "Enter Interger Number")
+
         if(numbers[0] != -1 or numbers[1]):
             try:
                 self.process.delete(0, END)
@@ -155,10 +156,11 @@ class GUI:
             "JSON": "1",
             "CSV": "2",
             "EXCEL": "3",
-            "SQL": "4"
+            "SQL": "4",
+            "HTML":"5"
         }
         for (label, value) in choices.items():
-            Radiobutton(master=ChoiceFrame, text=label, width=7, relief=FLAT, borderwidth=3,
+            Radiobutton(master=ChoiceFrame, text=label, width=7,height=2, relief=FLAT, borderwidth=3,
                         value=value, indicator=0, variable=select, background="light blue").grid(row=0, column=int(value), sticky="ns")
         return select
 

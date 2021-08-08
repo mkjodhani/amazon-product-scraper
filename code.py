@@ -8,16 +8,13 @@ import pandas as pd
 class GUI:
     def __init__(self) -> None:
         self.window = Tk()
-        # self.scraper = Scraper()
+
         self.window.geometry("500x400")
         self.window.minsize(500, 400)
-        # self.window.maxsize(500,400)
+
         self.outerFrame = Frame(master=self.window)
         self.window.title("Amazon Product Scraper")
         self.mainFrame = Frame(self.outerFrame, bg="#F2A119")
-        # Title
-        # self.header = self.makeHeader(
-        #     self.window, "Amazon Product Scraper", {"row": 0, "col": 0})
 
         # Directory row
         self.setLabel(self.mainFrame, "Directory", 10, {"row": 1, "col": 0})
@@ -44,7 +41,7 @@ class GUI:
         # Progress row
         self.setLabel(self.mainFrame, "Progress Status",
                       10, {"row": 6, "col": 0})
-        # self.pb = self.createProgressBar(self.mainFrame, 250, {"row": 6, "col": 1})
+
         self.process = self.setEntry(self.mainFrame, 30, {"row": 6, "col": 1})
 
         # 8th row
@@ -75,14 +72,16 @@ class GUI:
                     args[index].insert(0, "Enter Interger Number")
         if(numbers[0] != -1 or numbers[1]):
             try:
-                self.process .delete(0, END)
-                self.process .insert(0, "Fetching.........")
+                self.process.delete(0, END)
+                self.process.insert(0, "Fetching.........")
                 scraper = Scraper(args[0].get(
                 ), url + args[1].get().replace(" ", "+"), numbers[0], numbers[1], args[4].get())
                 dataFrame = scraper.amazonScrapper()
                 self.showTable(dataFrame)
-                self.process .delete(0, END)
-                self.process .insert(0, "Fetching...... Completed!")
+                self.process.delete(0, END)
+                self.process.insert(0, "Fetching...... Completed!")
+                self.window.attributes('-fullscreen', True)
+                self.window.attributes('-zoomed', True)
             except Exception as e:
                 self.process.delete(0, END)
                 self.process.insert(0, e)
@@ -96,7 +95,6 @@ class GUI:
         )
         labelDirectoryFrame.grid(
             row=position["row"], column=position["col"], padx=5, pady=5, sticky="nsew")
-        # mainFrame.rowconfigure(labelDirectoryFrame, position["row"], weight=1)
         label = Label(master=labelDirectoryFrame, text=value, pady=10)
         label.pack()
         return label
@@ -176,8 +174,8 @@ class GUI:
 
     def showTable(self, data):
         self.tableFrame = Frame(master=self.window)
-        tableFrame.pack(fill=BOTH, expand=1)
-        pt = Table(tableFrame, dataframe=data,
+        self.tableFrame.pack(fill=BOTH, expand=1)
+        pt = Table(self.tableFrame, dataframe=data,
                    showtoolbar=True, showstatusbar=True)
         pt.show()
         

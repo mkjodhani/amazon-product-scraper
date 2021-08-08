@@ -63,7 +63,8 @@ class Scraper:
         url_pages = [self.url]
         page_number = 1
         product_ID = 1
-        
+        product_names = set()
+        productImages = set()
         for url in url_pages:
             html_text = self.scrape(url)
             soup = BeautifulSoup(html_text,'html.parser')
@@ -83,10 +84,6 @@ class Scraper:
                         url_pages.append("https://www.amazon.in"+a_tag['href'])
                         page_number += 1
 
-            # while(len(product_name) == 0):
-            #     html_text = self.scrape(url)
-            #     soup = BeautifulSoup(html_text,'html.parser')
-
             for p_name in product_name:
 
                 images = p_name.find_all('img',class_ ='s-image')
@@ -96,13 +93,15 @@ class Scraper:
                     download_path =  images[0]['src']
                     imagePath = download_path.split('/')[-1].split('?')[0]
                     price_value = price[0].text.replace(".","").replace(",","")
-
-                    row = pd.Series(data=[product_ID,product_name_from_web,price_value,f'{ self.location+"/"+imagePath}',download_path],index=["ID","Name","Price","Image","Image URL"],name=product_ID)
-                    self.dataFrame = self.dataFrame.append(row)
-                    product_ID += 1
-                    file = open( self.location+"/"+imagePath,'wb')
-                    file.write(requests.get(download_path).content)
-                    file.close()
+                    if(product_name_from_web not in product_names and download_path not in productImages):
+                        product_names.add(product_name_from_web)
+                        productImages.add(download_path)
+                        row = pd.Series(data=[product_ID,product_name_from_web,price_value,f'{ self.location+"/"+imagePath}',download_path],index=["ID","Name","Price","Image","Image URL"],name=product_ID)
+                        self.dataFrame = self.dataFrame.append(row)
+                        product_ID += 1
+                        file = open( self.location+"/"+imagePath,'wb')
+                        file.write(requests.get(download_path).content)
+                        file.close()
                     if product_ID > self.maxItems:
                         self.save()
                         return self.dataFrame 
